@@ -75,6 +75,7 @@ while True:
                 print("Invalid command")
             else:
                 fs.print_all_in_curr_directory()
+                print()
         case _:
             print("Invalid command")
     fs.save('filesystem_dump.pkl')

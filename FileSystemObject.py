@@ -64,4 +64,4 @@ class Directory(FileSystemObject):
         self.children.remove(child)
 
     def list_contents(self):
-        return ['dir: ' if isinstance(child, Directory) else 'file: ' + child.name for child in self.children]
+        return ['dir: ' + child.name if isinstance(child, Directory) else 'file: ' + child.name for child in self.children]

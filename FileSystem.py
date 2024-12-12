@@ -52,7 +52,6 @@ class FileSystem:
         for child in self.current_directory.children:
             if isinstance(child, File) and child.name == name:
                 return child
-        print("File not found")
         return None
 
     def get_path(self):
@@ -66,13 +65,11 @@ class FileSystem:
     def save(self, filename):
         with open(filename, 'wb') as f:
             pickle.dump(self, f)
-        print(f"File system saved to {filename}")
+        #print(f"File system saved to {filename}")
 
     def print_all_in_curr_directory(self):
         for name in self.current_directory.list_contents():
             print(name)
-
-        print()
     @staticmethod
     def load(filename):
         with open(filename, 'rb') as f:
