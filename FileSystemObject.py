@@ -8,9 +8,8 @@ class FileSystemObject:
         self.creation_date = datetime.now()
 
 class File(FileSystemObject):
-    def __init__(self, name, size, file_system, parent=None):
+    def __init__(self, name, file_system, parent=None):
         super().__init__(name, parent)
-        self.size = size
         self.file_system = file_system
         self.first_block = None
 
