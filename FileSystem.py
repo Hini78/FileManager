@@ -68,6 +68,11 @@ class FileSystem:
             pickle.dump(self, f)
         print(f"File system saved to {filename}")
 
+    def print_all_in_curr_directory(self):
+        for name in self.current_directory.list_contents():
+            print(name)
+
+        print()
     @staticmethod
     def load(filename):
         with open(filename, 'rb') as f:

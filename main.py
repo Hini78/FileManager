@@ -1,35 +1,83 @@
 from FileSystem import *
-import pickle
 
-# Пример использования
+
+def print_commands() -> None:
+    print(
+        "Commands: \n" +
+        "1)CreateDir [dirname]\n" +
+        "2)CreateFile [filename] [size]\n" +
+        "3)WriteFile [filename] [data]\n" +
+        "4)ReadFile [filename]\n" +
+        "5)Into [dirname] or [..]\n" +
+        "6)All\n" +
+        "7)Exit\n"
+    )
+
+
+
+
 try:
     fs = FileSystem.load('filesystem_dump.pkl')
 except FileNotFoundError:
     fs = FileSystem(total_blocks=10, block_size=10)
 
-root_dir = fs.root
+cur = fs.root
+while True:
+    print("Current path: " + fs.get_path())
+    print_commands()
 
-# Создание поддиректории и файлов
-fs.create_directory("dir1")
-fs.create_directory("dir2")
-fs.change_directory("dir1")#пошли в dir1 чтобы там создать файл
+    command = input()
+    if command == "Exit":
+        break
+    command = command.strip().split(" ")
 
-file1 = fs.create_file("file1.txt", 5)
-file1.write("Hello, this is a test for block-based file system.")
+    match command[0]:
+        case "CreateDir":
+            if len(command) != 2:
+                print("Invalid command")
+            else:
+                fs.create_directory(command[1])
 
-# Перемещение между директориями
-print(f"Current path: {fs.get_path()}")
-fs.change_directory("dir1")
-print(f"Current path: {fs.get_path()}")
-fs.change_directory("..")
-print(f"Current path: {fs.get_path()}")
-fs.change_directory("dir2")
-print(f"Current path: {fs.get_path()}")
+        case "CreateFile":
+            if len(command) != 3:
+                print("Invalid command")
+            else:
+                fs.create_file(command[1], command[2])
 
-# Чтение файла
-fs.change_directory("..")
-fs.change_directory("dir1")
-print(fs.read_file("file1.txt"))
+        case "WriteFile":
+            if len(command) != 3:
+                print("Invalid command")
+            else:
+                file = fs.get_file(command[1])
+                if file is None:
+                    print("File not found")
+                else:
+                    file.write(command[2])
 
-# Сохранение файловой системы
+        case "ReadFile":
+            if len(command) != 2:
+                print("Invalid command")
+            else:
+                file = fs.get_file(command[1])
+                if file is None:
+                    print("File not found")
+                else:
+                    print("Data:", file.read())
+
+        case "Into":
+            if len(command) != 2:
+                print("Invalid command")
+            else:
+                fs.change_directory(command[1])
+
+        case "All":
+            if len(command) != 1:
+                print("Invalid command")
+            else:
+                fs.print_all_in_curr_directory()
+        case _:
+            print("Invalid command")
+    fs.save('filesystem_dump.pkl')
+
+
 fs.save('filesystem_dump.pkl')
