@@ -15,8 +15,8 @@ class FileSystem:
                 return block
         return None
 
-    def create_file(self, name, size):
-        file = File(name, size, self, parent=self.current_directory)
+    def create_file(self, name):
+        file = File(name, self, parent=self.current_directory)
         self.current_directory.add_child(file)
         return file
 

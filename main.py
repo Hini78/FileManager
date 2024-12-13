@@ -5,7 +5,7 @@ def print_commands() -> None:
     print(
         "Commands: \n" +
         "1)CreateDir [dirname]\n" +
-        "2)CreateFile [filename] [size]\n" +
+        "2)CreateFile [filename]\n" +
         "3)WriteFile [filename] [data]\n" +
         "4)DeleteFile [filename]\n" +
         "4)ReadFile [filename]\n" +
@@ -40,10 +40,10 @@ while True:
                 fs.create_directory(command[1])
 
         case "CreateFile":
-            if len(command) != 3:
+            if len(command) != 2:
                 print("Invalid command")
             else:
-                fs.create_file(command[1], command[2])
+                fs.create_file(command[1])
 
         case "WriteFile":
             if len(command) < 3:
