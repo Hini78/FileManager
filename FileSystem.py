@@ -1,4 +1,6 @@
 import pickle
+
+from Block import Block
 from FileSystemObject import *
 
 
