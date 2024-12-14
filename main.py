@@ -8,10 +8,11 @@ def print_commands() -> None:
         "2)CreateFile [filename]\n" +
         "3)WriteFile [filename] [data]\n" +
         "4)DeleteFile [filename]\n" +
-        "4)ReadFile [filename]\n" +
-        "5)Into [dirname] or [..]\n" +
-        "6)All\n" +
-        "7)Exit\n"
+        "5)DeleteDir [dirname]\n"+
+        "6)ReadFile [filename]\n" +
+        "7)Into [dirname] or [..]\n" +
+        "8)All\n" +
+        "9)Exit\n"
     )
 
 
@@ -53,13 +54,20 @@ while True:
                 if file is None:
                     print("File not found")
                 else:
-                    file.write("".join(command[2:]))
+                    file.write(" ".join(command[2:]))
 
         case "DeleteFile":
             if len(command) != 2:
                 print("Invalid command")
             else:
                 fs.delete_file(command[1])
+
+        case "DeleteDir":
+            if len(command) != 2:
+                print("Invalid command")
+            else:
+                fs.delete_dir(command[1])
+
         case "ReadFile":
             if len(command) != 2:
                 print("Invalid command")
