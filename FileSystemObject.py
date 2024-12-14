@@ -50,7 +50,6 @@ class File(FileSystemObject):
         self.first_block = None
 
 
-
 class Directory(FileSystemObject):
     def __init__(self, name, parent=None):
         super().__init__(name, parent)

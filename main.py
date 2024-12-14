@@ -15,8 +15,6 @@ def print_commands() -> None:
     )
 
 
-
-
 try:
     fs = FileSystem.load('filesystem_dump.pkl')
 except FileNotFoundError:
