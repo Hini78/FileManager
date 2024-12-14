@@ -3,9 +3,9 @@ import array
 
 class Block:
     def __init__(self, size):
-        self.data = array.array('u', ' ' * size)  # Массив фиксированного размера для строковых данных
-        self.next_block = None  # Ссылка на следующий объект
-        self.prev_block = None  # Ссылка на предыдущий объект
+        self.data = array.array('u', ' ' * size)
+        self.next_block = None
+        self.prev_block = None
         self.file = None
         self.size = size
         self.used = 0
