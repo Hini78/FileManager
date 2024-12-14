@@ -1,11 +1,12 @@
 from datetime import datetime
-from Block import *
+
 
 class FileSystemObject:
     def __init__(self, name, parent=None):
         self.name = name
         self.parent = parent
         self.creation_date = datetime.now()
+
 
 class File(FileSystemObject):
     def __init__(self, name, file_system, parent=None):

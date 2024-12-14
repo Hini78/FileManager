@@ -3,6 +3,7 @@ from FileSystem import *
 
 def print_commands() -> None:
     print(
+        "===============================\n" +
         "Commands: \n" +
         "1)CreateDir [dirname]\n" +
         "2)CreateFile [filename]\n" +
@@ -11,10 +12,9 @@ def print_commands() -> None:
         "4)ReadFile [filename]\n" +
         "5)Into [dirname] or [..]\n" +
         "6)All\n" +
-        "7)Exit\n"
+        "7)Exit\n" +
+        "===============================\n"
     )
-
-
 
 
 try:
@@ -53,7 +53,7 @@ while True:
                 if file is None:
                     print("File not found")
                 else:
-                    file.write("".join(command[2:]))
+                    file.write(" ".join(command[2:]))
 
         case "DeleteFile":
             if len(command) != 2:

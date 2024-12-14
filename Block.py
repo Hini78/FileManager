@@ -1,5 +1,6 @@
 import array
 
+
 class Block:
     def __init__(self, size):
         self.data = array.array('u', ' ' * size)  # Массив фиксированного размера для строковых данных

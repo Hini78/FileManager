@@ -1,7 +1,6 @@
-from datetime import datetime
 import pickle
-from Block import *
 from FileSystemObject import *
+
 
 class FileSystem:
     def __init__(self, total_blocks, block_size):
