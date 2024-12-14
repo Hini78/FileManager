@@ -25,6 +25,12 @@ class FileSystem:
             file.delete()
             self.current_directory.remove_child(file)
 
+    def delete_dir(self, name):
+        dir = self.get_dir(name)
+        if dir:
+            dir.deleteDir()
+            self.current_directory.remove_child(dir)
+
     def read_file(self, name):
         file = self.get_file(name)
         if file:
@@ -50,6 +56,12 @@ class FileSystem:
     def get_file(self, name):
         for child in self.current_directory.children:
             if isinstance(child, File) and child.name == name:
+                return child
+        return None
+
+    def get_dir(self, name):
+        for child in self.current_directory.children:
+            if isinstance(child, Directory) and child.name == name:
                 return child
         return None
 
