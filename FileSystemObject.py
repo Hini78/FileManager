@@ -56,6 +56,9 @@ class Directory(FileSystemObject):
         self.children = []
 
     def add_child(self, child):
+        if any(c.name == child.name for c in self.children):
+            print(f"Child with name {child.name} already exists")
+            return
         self.children.append(child)
         child.parent = self
 
