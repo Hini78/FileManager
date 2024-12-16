@@ -59,6 +59,12 @@ while True:
             else:
                 fs.delete_file(command[1])
 
+        case "DeleteDir":
+            if len(command) != 2:
+                print("Invalid command")
+            else:
+                fs.delete_dir(command[1])
+
         case "ReadFile":
             if len(command) != 2:
                 print("Invalid command")
