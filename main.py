@@ -7,12 +7,13 @@ def print_commands() -> None:
         "2) CreateFile [filename]\n" +
         "3) WriteFile [filename] [data]\n" +
         "4) DeleteFile [filename]\n" +
-        "5) ReadFile [filename]\n" +
-        "6) Into [dirname] or [..]\n" +
-        "7) All\n" +
-        "8) copy [source_path] [dest_path]\n" +
-        "9) move [source_path] [dest_path]\n" +
-        "10) Exit\n"
+        "5) DeleteDir [directory name]\n" +
+        "6) ReadFile [filename]\n" +
+        "7) Into [dirname] or [..]\n" +
+        "8) All\n" +
+        "9) copy [source_path] [dest_path]\n" +
+        "10) move [source_path] [dest_path]\n" +
+        "11) Exit\n"
     )
 
 try:
