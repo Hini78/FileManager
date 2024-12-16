@@ -15,6 +15,11 @@ class FileSystem:
         return None
 
     def create_file(self, name):
+        existing_file = self.get_file(name)
+        if existing_file is not None:
+            print(f"File with name {name} already exists")
+            return None
+
         file = File(name, self, parent=self.current_directory)
         self.current_directory.add_child(file)
         return file
@@ -101,6 +106,11 @@ class FileSystem:
             print(f"Destination directory {dest_dir_path} not found")
             return
 
+        existing_file = self.get_file(dest_name)
+        if existing_file is not None:
+            print(f"File with name {dest_name} already exists")
+            return None
+
         dest_file = File(dest_name, self, parent=dest_dir)
         dest_dir.add_child(dest_file)
         data = src_file.read()
@@ -119,7 +129,10 @@ class FileSystem:
             print(f"Destination directory {dest_dir_path} not found")
             return
 
-        # Copy the file
+        existing_file = self.get_file(dest_name)
+        if existing_file is not None:
+            print(f"File with name {dest_name} already exists")
+            return None
         self.copy_file(src_path, dest_path)
 
         # Delete the source file

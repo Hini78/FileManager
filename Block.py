@@ -20,4 +20,7 @@ class Block:
 
     def clear(self):
         self.data = array.array('u', ' ' * self.size)
+        self.next_block = None
+        self.prev_block = None
+        self.file = None
         self.used = 0
