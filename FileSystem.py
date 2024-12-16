@@ -106,9 +106,9 @@ class FileSystem:
             print(f"Destination directory {dest_dir_path} not found")
             return
 
-        existing_file = self.get_file(dest_name)
+        existing_file = dest_dir.get_child(dest_name)
         if existing_file is not None:
-            print(f"File with name {dest_name} already exists")
+            print(f"File with name {dest_name} already exists in {dest_dir_path}")
             return None
 
         dest_file = File(dest_name, self, parent=dest_dir)
@@ -116,6 +116,7 @@ class FileSystem:
         data = src_file.read()
         dest_file.write(data)
         print(f"File {src_path} copied to {dest_path}")
+
 
     def move_file(self, src_path, dest_path):
         src_file = self.get_file_from_path(src_path)
@@ -129,9 +130,9 @@ class FileSystem:
             print(f"Destination directory {dest_dir_path} not found")
             return
 
-        existing_file = self.get_file(dest_name)
+        existing_file = dest_dir.get_child(dest_name)
         if existing_file is not None:
-            print(f"File with name {dest_name} already exists")
+            print(f"File with name {dest_name} already exists in {dest_dir_path}")
             return None
         self.copy_file(src_path, dest_path)
 
