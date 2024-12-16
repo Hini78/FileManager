@@ -1,8 +1,6 @@
 import pickle
-
 from Block import Block
 from FileSystemObject import *
-
 
 class FileSystem:
     def __init__(self, total_blocks, block_size):
@@ -83,6 +81,7 @@ class FileSystem:
     def print_all_in_curr_directory(self):
         for name in self.current_directory.list_contents():
             print(name)
+
     @staticmethod
     def load(filename):
         with open(filename, 'rb') as f:
@@ -90,4 +89,69 @@ class FileSystem:
         print(f"File system loaded from {filename}")
         return fs
 
+    def copy_file(self, src_path, dest_path):
+        src_file = self.get_file_from_path(src_path)
+        if not src_file:
+            print(f"Source file {src_path} not found")
+            return
+
+        dest_dir_path, dest_name = dest_path.rsplit('/', 1)
+        dest_dir = self.get_dir_from_path(dest_dir_path)
+        if not dest_dir:
+            print(f"Destination directory {dest_dir_path} not found")
+            return
+
+        dest_file = File(dest_name, self, parent=dest_dir)
+        dest_dir.add_child(dest_file)
+        data = src_file.read()
+        dest_file.write(data)
+        print(f"File {src_path} copied to {dest_path}")
+
+    def move_file(self, src_path, dest_path):
+        src_file = self.get_file_from_path(src_path)
+        if not src_file:
+            print(f"Source file {src_path} not found")
+            return
+
+        dest_dir_path, dest_name = dest_path.rsplit('/', 1)
+        dest_dir = self.get_dir_from_path(dest_dir_path)
+        if not dest_dir:
+            print(f"Destination directory {dest_dir_path} not found")
+            return
+
+        # Copy the file
+        self.copy_file(src_path, dest_path)
+
+        # Delete the source file
+        src_file.delete()
+        src_dir_path, _ = src_path.rsplit('/', 1)
+        src_dir = self.get_dir_from_path(src_dir_path)
+        src_dir.remove_child(src_file)
+        print(f"File {src_path} moved to {dest_path}")
+
+    def get_file_from_path(self, path):
+        elements = path.split('/')
+        if elements[0] != "root":
+            print("Path must start with root")
+            return None
+
+        current_dir = self.root
+        for elem in elements[1:-1]:
+            current_dir = current_dir.get_child(elem)
+            if not isinstance(current_dir, Directory):
+                return None
+        return current_dir.get_child(elements[-1])
+
+    def get_dir_from_path(self, path):
+        elements = path.split('/')
+        if elements[0] != "root":
+            print("Path must start with root")
+            return None
+
+        current_dir = self.root
+        for elem in elements[1:]:
+            current_dir = current_dir.get_child(elem)
+            if not isinstance(current_dir, Directory):
+                return None
+        return current_dir
 

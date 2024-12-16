@@ -68,6 +68,9 @@ class Directory(FileSystemObject):
                 child.deleteDir()
             else: child.delete()
 
-
+    def get_child(self, name):
+        for child in self.children:
+            if child.name == name: return child
+        return None
     def list_contents(self):
         return ['dir: ' + child.name if isinstance(child, Directory) else 'file: ' + child.name for child in self.children]
